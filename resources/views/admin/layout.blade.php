@@ -36,6 +36,7 @@
 </head>
 <body>
    
+    @include('partials.adminsidebar')
     @yield('content')
 </body>
 </html>
