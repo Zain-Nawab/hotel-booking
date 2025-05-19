@@ -17,21 +17,26 @@ Route::get('/', [BlogController::class, 'index'])->name('home.index');
 
 Route::get("/login", [AuthController::class, 'loginForm'])->name("loginForm");
 Route::post("/login", [AuthController::class, 'login'])->name("login");
-Route::post("/logout", [AuthController::class, 'logout'])->name('logout');
+Route::get("/logout", [AuthController::class, 'logout'])->name('logout');
 Route::get("/signup", [AuthController::class, 'signupForm'])->name("signupForm");
 Route::post("/register", [AuthController::class, 'register'])->name("register");
 
 
 //admin route
-Route::get('/admin/main', [DashboardController::class, 'index'])->name('admin.main');
+Route::middleware(['auth', 'is_admin'])->prefix('/admin')->group( function() {
 
-Route::get('/admin/rooms', [AdminRoomController::class, 'index'])->name('room.index');
-Route::get('/admin/room/create', [AdminRoomController::class, 'create'])->name('room.create');
-Route::post('/admin/room/store', [AdminRoomController::class, 'store'])->name('room.store');
+    Route::get('/main', [DashboardController::class, 'index'])->name('admin.main');
 
-Route::get('/admin/room/edit/{id}', [AdminRoomController::class, 'edit'])->name('room.edit');
-Route::get('/admin/room/update/{id}', [AdminRoomController::class, 'update'])->name('room.update');
-Route::get('/admin/room/delete/{id}', [AdminRoomController::class, 'destroy'])->name('room.destroy');
+Route::get('/rooms', [AdminRoomController::class, 'index'])->name('room.index');
+Route::get('/room/create', [AdminRoomController::class, 'create'])->name('room.create');
+Route::post('room/store', [AdminRoomController::class, 'store'])->name('room.store');
+
+Route::get('/room/edit/{id}', [AdminRoomController::class, 'edit'])->name('room.edit');
+Route::get('/room/update/{id}', [AdminRoomController::class, 'update'])->name('room.update');
+Route::get('room/delete/{id}', [AdminRoomController::class, 'destroy'])->name('room.destroy');
+
+
+});
 
 Route::get('/blog/room/show/{id}', [BlogController::class, 'show'])->name('rooms.show');
 Route::get('/admin/room/bookings/{id}', [AdminRoomController::class, 'bookings'])->name('room.booking');

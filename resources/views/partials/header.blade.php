@@ -27,6 +27,9 @@
                             @guest
                                 <li class="nav-item"><a class="nav-link" href="{{ route('loginForm') }}">Login</a></li>
                             @endguest
+                            @auth
+                                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Login Out</a></li>
+                            @endauth
                         </ul>
                     </div> 
                 </nav>
