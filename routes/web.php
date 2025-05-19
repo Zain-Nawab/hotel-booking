@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
@@ -26,4 +27,11 @@ Route::get('/admin/main', [DashboardController::class, 'index'])->name('admin.ma
 
 Route::get('/admin/rooms', [AdminRoomController::class, 'index'])->name('room.index');
 Route::get('/admin/room/create', [AdminRoomController::class, 'create'])->name('room.create');
-Route::get('/admin/room/store', [AdminRoomController::class, 'store'])->name('room.store');
+Route::post('/admin/room/store', [AdminRoomController::class, 'store'])->name('room.store');
+
+Route::get('/admin/room/edit/{id}', [AdminRoomController::class, 'edit'])->name('room.edit');
+Route::get('/admin/room/update/{id}', [AdminRoomController::class, 'update'])->name('room.update');
+Route::get('/admin/room/delete/{id}', [AdminRoomController::class, 'destroy'])->name('room.destroy');
+
+Route::get('/blog/room/show/{id}', [BlogController::class, 'show'])->name('rooms.show');
+Route::get('/admin/room/bookings/{id}', [AdminRoomController::class, 'bookings'])->name('room.booking');
