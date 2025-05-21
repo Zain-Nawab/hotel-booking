@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingController;
 
 ;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,9 @@ Route::get('room/delete/{id}', [AdminRoomController::class, 'destroy'])->name('r
 });
 
 Route::get('/blog/room/show/{id}', [BlogController::class, 'show'])->name('rooms.show');
-Route::get('/admin/room/bookings/{id}', [AdminRoomController::class, 'bookings'])->name('room.booking');
+// Route::get('/admin/room/bookings/{id}', [AdminRoomController::class, 'bookings'])->name('room.booking');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/room/{id}/booking', [BookingController::class, 'create'])->name('room.booking');
+    Route::post('/room/{id}/book', [BookingController::class, 'store'])->name('room.book.store');
+});
