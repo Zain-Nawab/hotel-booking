@@ -329,7 +329,7 @@ button:focus {
 }
 
 .navbar {
-  background: rgba(184, 184, 179, 0.363);
+  background: rgb(0, 0, 0);
   padding: 0px 25px;
 }
 
@@ -339,7 +339,7 @@ button:focus {
 
 .navbar .menu_nav .nav-item .nav-link {
   font: 500 12px/80px "Poppins", sans-serif;
-  color: #222222;
+  color: white;
   text-transform: uppercase;
   padding: 0px;
 }
@@ -472,7 +472,7 @@ button:focus {
   position: fixed;
   width: 100%;
   left: 0;
-  background: rgba(188, 188, 186, 0.543);
+  background: rgb(0, 0, 0);
   top: 0;
   top: -50px;
   -webkit-transform: translateY(50px);

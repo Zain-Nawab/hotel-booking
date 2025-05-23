@@ -4,7 +4,7 @@
     
 @endpush
 @section('content')
-<div class="container py-5">
+<div class="container py-5 mt-5">
     <div class="row">
         <div class="col-md-6">
             <img src="{{ asset('storage/'.$room->image) }}" class="img-fluid rounded shadow-sm w-100" alt="Room Image">

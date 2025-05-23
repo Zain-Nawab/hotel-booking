@@ -1,7 +1,18 @@
 @extends('master')
 
 @section('content')
-<div class="container py-5">
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<div class="container py-5 mt-5">
     <h2 class="mb-4"><i class="bi bi-calendar-check me-2"></i>Booking Room #{{ $room->room_number }}</h2>
 
     <form action="{{ route('room.book.store', $room->id) }}" method="POST">

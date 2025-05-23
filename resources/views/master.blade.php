@@ -29,9 +29,9 @@
       @include('partials.header')
     
      @if (request()->routeIs('home.index'))
-       
+       @include('partials.banner')
      @endif
-     @include('partials.banner')
+     
       
     
 

@@ -4,6 +4,11 @@
 
 @section('content')
 
+@push('style')
+
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">    
+@endpush
+
 
 <div class="container mt-5">
     <h2 class="mb-4">Create Room</h2>
@@ -12,18 +17,19 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-     @if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Error!</strong> Please fix the following:
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-   @endif
+     {{-- Global Error Messages --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>There were some problems with your input:</strong>
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    <form action="{{ route('room.store') }}" method="POST" enctype="multipart/form-data">
+    <form id="createForm" action="{{ route('room.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row mb-3">
@@ -84,7 +90,9 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description (optional)</label>
-            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            <textarea class="form-control d-none" id="description" name="description" rows="3"></textarea>
+
+            id="createForm"
         </div>
 
         <div class="mb-3">
@@ -95,4 +103,30 @@
         <button type="submit" class="btn btn-md w-25 btn-primary ">Create Room</button>
     </form>
 </div>
+
+@push('scripts')
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+
+<script>
+    const quill = new Quill('#editor', {
+      theme: 'snow'
+    });
+
+    document.querySelector("#createForm").addEventListener('submit' , function(e) {
+        e.preventDefault();
+
+        const textArea = document.querySelector("#description");
+
+        const html = quill.getSemanticHTML();
+
+        textArea.value = html;
+
+        document.querySelector("#createForm").submit();
+
+    });
+  </script>
+    
+@endpush
 @endsection
